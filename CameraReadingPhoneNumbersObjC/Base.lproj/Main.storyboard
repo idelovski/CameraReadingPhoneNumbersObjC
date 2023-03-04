@@ -1,24 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gU7-27-Bmm">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Vision View Controller-->
+        <scene sceneID="kDA-Ff-so2">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <viewController id="gU7-27-Bmm" customClass="VisionViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eGQ-0J-9b0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Eq-8r-JHG" userLabel="Preview View" customClass="PreviewView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" systemColor="systemBlueColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GHD-L3-UdR" userLabel="Cutout View">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b6V-sz-xn2" userLabel="Number View">
+                                <rect key="frame" x="116.5" y="430.5" width="181" height="35"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="000111">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="smallSystem"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="9bI-F8-xjH"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="GHD-L3-UdR" secondAttribute="bottom" id="4Qa-EN-6Fe"/>
+                            <constraint firstItem="b6V-sz-xn2" firstAttribute="centerY" secondItem="eGQ-0J-9b0" secondAttribute="centerY" placeholder="YES" id="5xE-2H-nNC"/>
+                            <constraint firstAttribute="trailing" secondItem="GHD-L3-UdR" secondAttribute="trailing" id="75C-TA-KxO"/>
+                            <constraint firstItem="7Eq-8r-JHG" firstAttribute="centerY" secondItem="eGQ-0J-9b0" secondAttribute="centerY" id="C4a-zB-MM5"/>
+                            <constraint firstAttribute="bottom" secondItem="7Eq-8r-JHG" secondAttribute="bottom" id="FRN-Js-p1D"/>
+                            <constraint firstItem="GHD-L3-UdR" firstAttribute="centerX" secondItem="eGQ-0J-9b0" secondAttribute="centerX" id="OhV-tH-ZoQ"/>
+                            <constraint firstItem="GHD-L3-UdR" firstAttribute="centerY" secondItem="eGQ-0J-9b0" secondAttribute="centerY" id="Rc2-in-IBL"/>
+                            <constraint firstAttribute="trailing" secondItem="7Eq-8r-JHG" secondAttribute="trailing" id="eQd-qP-iek"/>
+                            <constraint firstItem="b6V-sz-xn2" firstAttribute="centerX" secondItem="eGQ-0J-9b0" secondAttribute="centerX" placeholder="YES" id="euE-LV-r0t"/>
+                            <constraint firstItem="7Eq-8r-JHG" firstAttribute="centerX" secondItem="eGQ-0J-9b0" secondAttribute="centerX" id="k3x-Y4-0fz"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cutoutView" destination="GHD-L3-UdR" id="yYG-xn-hx8"/>
+                        <outlet property="numberView" destination="b6V-sz-xn2" id="2Qq-nM-A2x"/>
+                        <outlet property="previewView" destination="7Eq-8r-JHG" id="bAo-as-HVc"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dKO-Di-VnJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="AHU-ms-THe"/>
             </objects>
+            <point key="canvasLocation" x="-426.08695652173918" y="-652.23214285714278"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

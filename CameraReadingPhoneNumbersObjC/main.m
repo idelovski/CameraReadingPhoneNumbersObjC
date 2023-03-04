@@ -1,18 +1,16 @@
 //
 //  main.m
-//  CameraReadingPhoneNumbersObjC
+//  PDFCodeReader
 //
-//  Created by Igor Delovski on 04.03.2023..
+//  Created by Igor Delovski on 24.07.2015..
+//  Copyright (c) 2015. Igor Delovski. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 
 int main(int argc, char * argv[]) {
-   NSString * appDelegateClassName;
    @autoreleasepool {
-       // Setup code that might create autoreleased objects goes here.
-       appDelegateClassName = NSStringFromClass([AppDelegate class]);
+       return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
    }
-   return UIApplicationMain(argc, argv, nil, appDelegateClassName);
 }

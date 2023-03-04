@@ -7,28 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB3228CB29B3FBDE004875AE /* VisionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB3228C529B3FBDE004875AE /* VisionViewController.m */; };
+		EB3228CC29B3FBDE004875AE /* StringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EB3228C729B3FBDE004875AE /* StringUtils.m */; };
+		EB3228D029B3FBF0004875AE /* PreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB3228CF29B3FBF0004875AE /* PreviewView.m */; };
 		EB8668B829B3FAE10054B1EE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EB8668B729B3FAE10054B1EE /* AppDelegate.m */; };
-		EB8668BB29B3FAE10054B1EE /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EB8668BA29B3FAE10054B1EE /* SceneDelegate.m */; };
-		EB8668BE29B3FAE10054B1EE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB8668BD29B3FAE10054B1EE /* ViewController.m */; };
 		EB8668C129B3FAE10054B1EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB8668BF29B3FAE10054B1EE /* Main.storyboard */; };
 		EB8668C329B3FAE20054B1EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB8668C229B3FAE20054B1EE /* Assets.xcassets */; };
 		EB8668C629B3FAE20054B1EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB8668C429B3FAE20054B1EE /* LaunchScreen.storyboard */; };
 		EB8668C929B3FAE20054B1EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EB8668C829B3FAE20054B1EE /* main.m */; };
+		EBE1C7EB29B3FE4D00F2B487 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE1C7EA29B3FE4D00F2B487 /* CoreGraphics.framework */; };
+		EBE1C7ED29B3FE5500F2B487 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE1C7EC29B3FE5500F2B487 /* UIKit.framework */; };
+		EBE1C7EF29B3FE5E00F2B487 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE1C7EE29B3FE5E00F2B487 /* AVFoundation.framework */; };
+		EBE1C7F129B3FE6700F2B487 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE1C7F029B3FE6700F2B487 /* CoreMedia.framework */; };
+		EBE1C7F429B3FEB400F2B487 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE1C7F229B3FEB400F2B487 /* ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EB3228C529B3FBDE004875AE /* VisionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisionViewController.m; sourceTree = "<group>"; };
+		EB3228C629B3FBDE004875AE /* StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtils.h; sourceTree = "<group>"; };
+		EB3228C729B3FBDE004875AE /* StringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringUtils.m; sourceTree = "<group>"; };
+		EB3228CA29B3FBDE004875AE /* VisionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisionViewController.h; sourceTree = "<group>"; };
+		EB3228CE29B3FBF0004875AE /* PreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewView.h; sourceTree = "<group>"; };
+		EB3228CF29B3FBF0004875AE /* PreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewView.m; sourceTree = "<group>"; };
 		EB8668B329B3FAE10054B1EE /* CameraReadingPhoneNumbersObjC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CameraReadingPhoneNumbersObjC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB8668B629B3FAE10054B1EE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EB8668B729B3FAE10054B1EE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		EB8668B929B3FAE10054B1EE /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		EB8668BA29B3FAE10054B1EE /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		EB8668BC29B3FAE10054B1EE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		EB8668BD29B3FAE10054B1EE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		EB8668C029B3FAE10054B1EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EB8668C229B3FAE20054B1EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB8668C529B3FAE20054B1EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB8668C729B3FAE20054B1EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB8668C829B3FAE20054B1EE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EB8668D129B3FB040054B1EE /* Console-Output.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Console-Output.h"; sourceTree = "<group>"; };
+		EB8668D229B3FB040054B1EE /* Search-Results.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Search-Results.h"; sourceTree = "<group>"; };
+		EB8668D429B3FB040054B1EE /* Run-Debug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Run-Debug.h"; sourceTree = "<group>"; };
+		EBE1C7EA29B3FE4D00F2B487 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		EBE1C7EC29B3FE5500F2B487 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		EBE1C7EE29B3FE5E00F2B487 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		EBE1C7F029B3FE6700F2B487 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		EBE1C7F229B3FEB400F2B487 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		EBE1C7F329B3FEB400F2B487 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,17 +53,43 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBE1C7F129B3FE6700F2B487 /* CoreMedia.framework in Frameworks */,
+				EBE1C7EB29B3FE4D00F2B487 /* CoreGraphics.framework in Frameworks */,
+				EBE1C7ED29B3FE5500F2B487 /* UIKit.framework in Frameworks */,
+				EBE1C7EF29B3FE5E00F2B487 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EB3228D129B3FD75004875AE /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				EBE1C7F329B3FEB400F2B487 /* ViewController.h */,
+				EBE1C7F229B3FEB400F2B487 /* ViewController.m */,
+				EB3228CA29B3FBDE004875AE /* VisionViewController.h */,
+				EB3228C529B3FBDE004875AE /* VisionViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		EB3228D229B3FDA4004875AE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EB3228CF29B3FBF0004875AE /* PreviewView.m */,
+				EB3228CE29B3FBF0004875AE /* PreviewView.h */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		EB8668AA29B3FAE10054B1EE = {
 			isa = PBXGroup;
 			children = (
+				EB8668CF29B3FB040054B1EE /* 4Dummies */,
 				EB8668B529B3FAE10054B1EE /* CameraReadingPhoneNumbersObjC */,
 				EB8668B429B3FAE10054B1EE /* Products */,
+				EBE1C7E929B3FE4C00F2B487 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,10 +106,10 @@
 			children = (
 				EB8668B629B3FAE10054B1EE /* AppDelegate.h */,
 				EB8668B729B3FAE10054B1EE /* AppDelegate.m */,
-				EB8668B929B3FAE10054B1EE /* SceneDelegate.h */,
-				EB8668BA29B3FAE10054B1EE /* SceneDelegate.m */,
-				EB8668BC29B3FAE10054B1EE /* ViewController.h */,
-				EB8668BD29B3FAE10054B1EE /* ViewController.m */,
+				EB3228D229B3FDA4004875AE /* Views */,
+				EB3228D129B3FD75004875AE /* ViewControllers */,
+				EB3228C629B3FBDE004875AE /* StringUtils.h */,
+				EB3228C729B3FBDE004875AE /* StringUtils.m */,
 				EB8668BF29B3FAE10054B1EE /* Main.storyboard */,
 				EB8668C229B3FAE20054B1EE /* Assets.xcassets */,
 				EB8668C429B3FAE20054B1EE /* LaunchScreen.storyboard */,
@@ -74,6 +117,28 @@
 				EB8668C829B3FAE20054B1EE /* main.m */,
 			);
 			path = CameraReadingPhoneNumbersObjC;
+			sourceTree = "<group>";
+		};
+		EB8668CF29B3FB040054B1EE /* 4Dummies */ = {
+			isa = PBXGroup;
+			children = (
+				EB8668D129B3FB040054B1EE /* Console-Output.h */,
+				EB8668D229B3FB040054B1EE /* Search-Results.h */,
+				EB8668D429B3FB040054B1EE /* Run-Debug.h */,
+			);
+			name = 4Dummies;
+			path = ../../Desktop/4Dummies;
+			sourceTree = "<group>";
+		};
+		EBE1C7E929B3FE4C00F2B487 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EBE1C7F029B3FE6700F2B487 /* CoreMedia.framework */,
+				EBE1C7EE29B3FE5E00F2B487 /* AVFoundation.framework */,
+				EBE1C7EC29B3FE5500F2B487 /* UIKit.framework */,
+				EBE1C7EA29B3FE4D00F2B487 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,10 +211,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB8668BE29B3FAE10054B1EE /* ViewController.m in Sources */,
+				EBE1C7F429B3FEB400F2B487 /* ViewController.m in Sources */,
+				EB3228CB29B3FBDE004875AE /* VisionViewController.m in Sources */,
+				EB3228D029B3FBF0004875AE /* PreviewView.m in Sources */,
+				EB3228CC29B3FBDE004875AE /* StringUtils.m in Sources */,
 				EB8668B829B3FAE10054B1EE /* AppDelegate.m in Sources */,
 				EB8668C929B3FAE20054B1EE /* main.m in Sources */,
-				EB8668BB29B3FAE10054B1EE /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,7 +357,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NMJWT35ZBH;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -307,6 +375,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = hr.delovski.CameraReadingPhoneNumbersObjC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = iOSDevJul2022B;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -317,7 +386,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NMJWT35ZBH;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -334,6 +404,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = hr.delovski.CameraReadingPhoneNumbersObjC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = iOSDevJul2022B;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
