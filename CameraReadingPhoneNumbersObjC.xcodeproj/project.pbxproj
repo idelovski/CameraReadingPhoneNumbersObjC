@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EB3228CB29B3FBDE004875AE /* VisionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB3228C529B3FBDE004875AE /* VisionViewController.m */; };
 		EB3228CC29B3FBDE004875AE /* StringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EB3228C729B3FBDE004875AE /* StringUtils.m */; };
-		EB3228D029B3FBF0004875AE /* PreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB3228CF29B3FBF0004875AE /* PreviewView.m */; };
 		EB8668B829B3FAE10054B1EE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EB8668B729B3FAE10054B1EE /* AppDelegate.m */; };
 		EB8668C129B3FAE10054B1EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB8668BF29B3FAE10054B1EE /* Main.storyboard */; };
 		EB8668C329B3FAE20054B1EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB8668C229B3FAE20054B1EE /* Assets.xcassets */; };
@@ -20,15 +18,13 @@
 		EBE1C7EF29B3FE5E00F2B487 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE1C7EE29B3FE5E00F2B487 /* AVFoundation.framework */; };
 		EBE1C7F129B3FE6700F2B487 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE1C7F029B3FE6700F2B487 /* CoreMedia.framework */; };
 		EBE1C7F429B3FEB400F2B487 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE1C7F229B3FEB400F2B487 /* ViewController.m */; };
+		EBE1C7F729B3FF7D00F2B487 /* PreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE1C7F629B3FF7C00F2B487 /* PreviewView.m */; };
+		EBE1C7FA29B3FF9100F2B487 /* VisionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE1C7F929B3FF9100F2B487 /* VisionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		EB3228C529B3FBDE004875AE /* VisionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisionViewController.m; sourceTree = "<group>"; };
 		EB3228C629B3FBDE004875AE /* StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtils.h; sourceTree = "<group>"; };
 		EB3228C729B3FBDE004875AE /* StringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringUtils.m; sourceTree = "<group>"; };
-		EB3228CA29B3FBDE004875AE /* VisionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisionViewController.h; sourceTree = "<group>"; };
-		EB3228CE29B3FBF0004875AE /* PreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewView.h; sourceTree = "<group>"; };
-		EB3228CF29B3FBF0004875AE /* PreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewView.m; sourceTree = "<group>"; };
 		EB8668B329B3FAE10054B1EE /* CameraReadingPhoneNumbersObjC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CameraReadingPhoneNumbersObjC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB8668B629B3FAE10054B1EE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EB8668B729B3FAE10054B1EE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -46,6 +42,10 @@
 		EBE1C7F029B3FE6700F2B487 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		EBE1C7F229B3FEB400F2B487 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		EBE1C7F329B3FEB400F2B487 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		EBE1C7F529B3FF7C00F2B487 /* PreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewView.h; sourceTree = "<group>"; };
+		EBE1C7F629B3FF7C00F2B487 /* PreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewView.m; sourceTree = "<group>"; };
+		EBE1C7F829B3FF9100F2B487 /* VisionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisionViewController.h; sourceTree = "<group>"; };
+		EBE1C7F929B3FF9100F2B487 /* VisionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,8 +68,8 @@
 			children = (
 				EBE1C7F329B3FEB400F2B487 /* ViewController.h */,
 				EBE1C7F229B3FEB400F2B487 /* ViewController.m */,
-				EB3228CA29B3FBDE004875AE /* VisionViewController.h */,
-				EB3228C529B3FBDE004875AE /* VisionViewController.m */,
+				EBE1C7F829B3FF9100F2B487 /* VisionViewController.h */,
+				EBE1C7F929B3FF9100F2B487 /* VisionViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -77,8 +77,8 @@
 		EB3228D229B3FDA4004875AE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EB3228CF29B3FBF0004875AE /* PreviewView.m */,
-				EB3228CE29B3FBF0004875AE /* PreviewView.h */,
+				EBE1C7F529B3FF7C00F2B487 /* PreviewView.h */,
+				EBE1C7F629B3FF7C00F2B487 /* PreviewView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -212,10 +212,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBE1C7F429B3FEB400F2B487 /* ViewController.m in Sources */,
-				EB3228CB29B3FBDE004875AE /* VisionViewController.m in Sources */,
-				EB3228D029B3FBF0004875AE /* PreviewView.m in Sources */,
+				EBE1C7F729B3FF7D00F2B487 /* PreviewView.m in Sources */,
 				EB3228CC29B3FBDE004875AE /* StringUtils.m in Sources */,
 				EB8668B829B3FAE10054B1EE /* AppDelegate.m in Sources */,
+				EBE1C7FA29B3FF9100F2B487 /* VisionViewController.m in Sources */,
 				EB8668C929B3FAE20054B1EE /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
