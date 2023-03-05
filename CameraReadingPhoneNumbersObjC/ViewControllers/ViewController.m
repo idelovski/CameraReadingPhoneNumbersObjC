@@ -115,7 +115,7 @@ Main view controller: handles camera, preview and cutout UI.
    // buffer width to height. When the UI is rotated to portrait, keep the
    // vertical size the same (in buffer pixels). Also try to keep the
    // horizontal size the same up to a maximum ratio.
-   float  desiredHeightRatio = 0.15;
+   float  desiredHeightRatio = 0.25;
    float  desiredWidthRatio = 0.6;
    float  maxPortraitWidth = 0.8;
 

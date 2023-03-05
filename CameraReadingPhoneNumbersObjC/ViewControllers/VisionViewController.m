@@ -16,17 +16,17 @@ Vision view controller.
    __weak  typeof(self)    weakSelf = self;
    // Set up vision request before letting ViewController set up the camera
    // so that it exists when the first buffer is received.
+   self.numberTracker = [[StringTracker alloc] init];
+   self.boxLayers = [NSMutableArray array];
+   
    self.request = [[VNRecognizeTextRequest alloc] initWithCompletionHandler:^(VNRequest *request, NSError *error)  {
       [weakSelf recognizeTextHandler:request error:error];
    }];
    
    [super viewDidLoad];
    
-   self.numberTracker = [[StringTracker alloc] init];
-   self.boxLayers = [NSMutableArray array];
-   
-   if (self.previewView)
-      NSLog (@"What is this?");
+   // if (self.previewView)
+   //    NSLog (@"What is this?");
 }
 
 // void  (^recognizeTextHandler) (VNRequest *request, NSError *error) = ^(VNRequest *request, NSError *error)
@@ -36,8 +36,10 @@ Vision view controller.
    NSMutableArray  *redBoxes = [NSMutableArray array];  // var redBoxes = [CGRect]() // Shows all recognized text lines
    NSMutableArray  *greenBoxes = [NSMutableArray array];  // var greenBoxes = [CGRect]() // Shows words that might be serials
    
-   if (![request isKindOfClass:[VNRecognizeTextRequest class]])
+   if (![request isKindOfClass:[VNRecognizeTextRequest class]])  {
+      NSLog (@"Wrong!");
       return;
+   }
    
    VNRecognizeTextRequest  *textRequests = (VNRecognizeTextRequest *)request;
       
@@ -54,16 +56,18 @@ Vision view controller.
             NSError   *bError;
             NSString  *numberStr = [candidate.firstObject.string extractPhoneNumber:&range];
             
-            VNRecognizedText  *recText = [candidate objectAtIndex:0];
-            
-            VNRectangleObservation  *boundingObservation = [recText boundingBoxForRange:range
-                                                                                    error:&bError];
-            CGRect  box = boundingObservation.boundingBox;
-            
-            [numbers addObject:numberStr];
-            [greenBoxes addObject:[NSValue valueWithCGRect:box]];
-            
-            numberIsSubstring = !(range.location == 0 && (range.location+range.length) == numberStr.length);
+            if (numberStr)  {
+               VNRecognizedText  *recText = [candidate objectAtIndex:0];
+               
+               VNRectangleObservation  *boundingObservation = [recText boundingBoxForRange:range
+                                                                                       error:&bError];
+               CGRect  box = boundingObservation.boundingBox;
+               
+               [numbers addObject:numberStr];
+               [greenBoxes addObject:[NSValue valueWithCGRect:box]];
+               
+               numberIsSubstring = !(range.location == 0 && (range.location+range.length) == numberStr.length);
+            }
          }
          if (numberIsSubstring)
             [redBoxes addObject:[NSValue valueWithCGRect:textObservation.boundingBox]];

@@ -35,6 +35,8 @@ Utilities for dealing with recognized strings
    @"(\\w{4})\b"            // Capture xxxx
    @"";
    
+   NSLog (@"String: %@", self);
+   
    NSRange  range = [self rangeOfString:pattern 
                                 options:NSRegularExpressionSearch 
                                   range:NSMakeRange(0, [self length]) 
