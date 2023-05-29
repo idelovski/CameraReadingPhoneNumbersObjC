@@ -19,7 +19,7 @@ Vision view controller.
    self.numberTracker = [[StringTracker alloc] init];
    self.boxLayers = [NSMutableArray array];
    
-   self.request = [[VNRecognizeTextRequest alloc] initWithCompletionHandler:^(VNRequest *request, NSError *error)  {
+   self.ocrRequest = [[VNRecognizeTextRequest alloc] initWithCompletionHandler:^(VNRequest *request, NSError *error)  {
       [weakSelf recognizeTextHandler:request error:error];
    }];
    
@@ -62,6 +62,8 @@ Vision view controller.
                VNRectangleObservation  *boundingObservation = [recText boundingBoxForRange:range
                                                                                        error:&bError];
                CGRect  box = boundingObservation.boundingBox;
+
+               NSLog (@"Green Box: %@", NSStringFromCGRect(boundingObservation.boundingBox)); 
                
                [numbers addObject:numberStr];
                [greenBoxes addObject:[NSValue valueWithCGRect:box]];
@@ -69,8 +71,10 @@ Vision view controller.
                numberIsSubstring = !(range.location == 0 && (range.location+range.length) == numberStr.length);
             }
          }
-         if (numberIsSubstring)
+         if (numberIsSubstring)  {
+            NSLog (@"Red Box: %@", NSStringFromCGRect(textObservation.boundingBox)); 
             [redBoxes addObject:[NSValue valueWithCGRect:textObservation.boundingBox]];
+         }
       }
    }
 
@@ -90,6 +94,8 @@ Vision view controller.
    }
 }
 
+// MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
+
 - (void)captureOutput:(AVCaptureOutput *)output
 didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
        fromConnection:(AVCaptureConnection *)connection
@@ -101,17 +107,17 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
       
       if (pixelBuffer)  {
          // Configure for running in real-time.
-         self.request.recognitionLevel = VNRequestTextRecognitionLevelFast;
+         self.ocrRequest.recognitionLevel = VNRequestTextRecognitionLevelFast;
          // Language correction won't help recognizing phone numbers. It also
          // makes recognition slower.
-         self.request.usesLanguageCorrection = NO;
+         self.ocrRequest.usesLanguageCorrection = NO;
          // Only run on the region of interest for maximum speed.
-         self.request.regionOfInterest = self.regionOfInterest;
+         self.ocrRequest.regionOfInterest = self.ocrRegionOfInterest;
          
          VNImageRequestHandler  *requestHandler = [[VNImageRequestHandler alloc] initWithCVPixelBuffer:pixelBuffer
                                                                                            orientation:self.textOrientation
                                                                                                options:[NSDictionary dictionary]];
-         if (![requestHandler performRequests:@[self.request] error:&error] && error)
+         if (![requestHandler performRequests:@[self.ocrRequest] error:&error] && error)
             NSLog (@"%@", error);
       }
    }

@@ -10,11 +10,11 @@ Main view controller: handles camera, preview and cutout UI.
 
 @implementation  ViewController
 
-- (void)init_a
+- (void)_commonSetup
 {
    // self = [super init];
    
-   _maskLayer = [CAShapeLayer layer];
+   _ocrMaskLayer = [CAShapeLayer layer];
    // Device orientation. Updated whenever the orientation changes to a
    // different supported orientation.
    _currentDeviceOrientation = UIDeviceOrientationPortrait;
@@ -29,7 +29,7 @@ Main view controller: handles camera, preview and cutout UI.
    // MARK: - Region of interest (ROI) and text orientation
    // Region of video data output buffer that recognition should be run on.
    // Gets recalculated once the bounds of the preview layer are known.
-   _regionOfInterest = CGRectMake (0.f, 0.f, 1.f, 1.f);  // (x: 0, y: 0, width: 1, height: 1)
+   _ocrRegionOfInterest = CGRectMake (0.f, 0.f, 1.f, 1.f);  // (x: 0, y: 0, width: 1, height: 1)
    // Orientation of text to search for in the region of interest.
    _textOrientation = kCGImagePropertyOrientationUp;
    
@@ -38,7 +38,6 @@ Main view controller: handles camera, preview and cutout UI.
    
    self.bottomToTopTransform = CGAffineTransformTranslate (CGAffineTransformMakeScale(1., -1.), 0., -1.);
 
-   
    self.visionToAVFTransform = CGAffineTransformIdentity;
    
    // return (self);
@@ -48,16 +47,16 @@ Main view controller: handles camera, preview and cutout UI.
 {
    [super viewDidLoad];
    
-   [self init_a];
+   [self _commonSetup];
    
    self.previewView.session = self.captureSession;
 
    // Set up cutout view.
    self.cutoutView.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.5f];
-   self.maskLayer.backgroundColor  = [UIColor clearColor].CGColor;
-   self.maskLayer.fillRule = kCAFillRuleEvenOdd;
+   self.ocrMaskLayer.backgroundColor  = [UIColor clearColor].CGColor;
+   self.ocrMaskLayer.fillRule = kCAFillRuleEvenOdd;
 
-   self.cutoutView.layer.mask = self.maskLayer;
+   self.cutoutView.layer.mask = self.ocrMaskLayer;
    
    // Starting the capture session is a blocking call. Perform setup using
    // a dedicated serial dispatch queue to prevent blocking the main thread.
@@ -91,7 +90,7 @@ Main view controller: handles camera, preview and cutout UI.
    AVCaptureConnection  *videoPreviewLayerConnection = self.previewView.videoPreviewLayer.connection;
 
    if (videoPreviewLayerConnection)  {
-      AVCaptureVideoOrientation  newVideoOrientation = [self currentVideoOrientation];
+      AVCaptureVideoOrientation  newVideoOrientation = self.currentVideoOrientation;
       
       videoPreviewLayerConnection.videoOrientation = newVideoOrientation;
    }
@@ -108,6 +107,10 @@ Main view controller: handles camera, preview and cutout UI.
 }
 
 // MARK: - Setup
+
+// Called ...
+// a) after -setupCamera, aasync in -viewDidLoad
+// b) in -viewWillTransitionToSize:
 
 - (void)calculateRegionOfInterest
 {
@@ -133,12 +136,14 @@ Main view controller: handles camera, preview and cutout UI.
    }
    
    // Make it centered.
-   CGRect  roiRect = self.regionOfInterest;
+   CGRect  roiRect = self.ocrRegionOfInterest;
    
    roiRect.origin = CGPointMake ((1 - size.width) / 2, (1 - size.height) / 2);
    roiRect.size = size;
    
-   self.regionOfInterest = roiRect;
+   NSLog (@"calculateRegionOfInterest - roiRect: %@", NSStringFromCGRect(roiRect));
+   
+   self.ocrRegionOfInterest = roiRect;
    
    // ROI changed, update transform.
    [self setupOrientationAndTransform];
@@ -151,33 +156,43 @@ Main view controller: handles camera, preview and cutout UI.
    });
 }
 
+// called from...
+// a) viewDidLayoutSubviews
+// b) calculateRegionOfInterest
+
 - (void)updateCutout
 {
    // Figure out where the cutout ends up in layer coordinates.
    CGAffineTransform  roiRectTransform = CGAffineTransformConcat (self.bottomToTopTransform, self.uiRotationTransform);
    
    // If it does not work, see: https://stackoverflow.com/questions/18710933/objective-c-how-to-rotate-cgrect
-   CGRect  cutout = [self.previewView.videoPreviewLayer rectForMetadataOutputRectOfInterest:CGRectApplyAffineTransform(self.regionOfInterest, roiRectTransform)];
+   CGRect  cutout = [self.previewView.videoPreviewLayer rectForMetadataOutputRectOfInterest:CGRectApplyAffineTransform(self.ocrRegionOfInterest, roiRectTransform)];
+   
+   NSLog (@"updateCutout - view: %@", NSStringFromCGRect(self.view.frame));
+   NSLog (@"updateCutout - cutout: %@", NSStringFromCGRect(cutout));
+   NSLog (@"updateCutout - cutoutView: %@", NSStringFromCGRect(self.cutoutView.frame));
    
    // Create the mask.
-   UIBezierPath  *path = [UIBezierPath bezierPathWithRect:self.cutoutView.frame];
+   CGRect         cutoutViewFrame = self.cutoutView.frame;
+   UIBezierPath  *path = [UIBezierPath bezierPathWithRect:cutoutViewFrame];
    [path appendPath:[UIBezierPath bezierPathWithRect:cutout]];
-   self.maskLayer.path = path.CGPath;
+   self.ocrMaskLayer.path = path.CGPath;
    
    // Move the number view down to under cutout.
    CGRect  numFrame = cutout;
    
    numFrame.origin.y += numFrame.size.height;
 
-   self.numberView.frame = numFrame;  // Label
+   self.numberLabel.frame = numFrame;  // Label
+   NSLog (@"updateCutout - self.numberLabel.frame: %@", NSStringFromCGRect(self.numberLabel.frame));
 }
       
-- (void)setupOrientationAndTransform
+- (void)setupOrientationAndTransform  // called from -calculateRegionOfInterest
 {
    // Recalculate the affine transform between Vision coordinates and AVF coordinates.
    
    // Compensate for region of interest.
-   CGRect  roi = self.regionOfInterest;
+   CGRect  roi = self.ocrRegionOfInterest;
    
    // self.roiToGlobalTransform = CGAffineTransform(translationX: roi.origin.x, y: roi.origin.y).scaledBy(x: roi.width, y: roi.height)
    
@@ -322,8 +337,8 @@ Main view controller: handles camera, preview and cutout UI.
       [self.captureSession stopRunning];
       
       dispatch_async (dispatch_get_main_queue(), ^{
-         self.numberView.text = string;
-         self.numberView.hidden = NO;
+         self.numberLabel.text = string;
+         self.numberLabel.hidden = NO;
       });
    });
 }
@@ -335,7 +350,7 @@ Main view controller: handles camera, preview and cutout UI.
          [self.captureSession startRunning];
       }
       dispatch_async (dispatch_get_main_queue(), ^{
-         self.numberView.hidden = YES;
+         self.numberLabel.hidden = YES;
       });
    });
 }

@@ -11,15 +11,17 @@ Main view controller: handles camera, preview and cutout UI.
 
 #import "PreviewView.h"
 
+// Base class for VisionViewController
+
 @interface  ViewController : UIViewController
 
 <AVCaptureVideoDataOutputSampleBufferDelegate>
 
 @property  (weak, nonatomic)  IBOutlet  PreviewView  *previewView;
-@property  (weak, nonatomic)  IBOutlet  UIView       *cutoutView;
-@property  (weak, nonatomic)  IBOutlet  UILabel      *numberView;  // Label
+@property  (weak, nonatomic)  IBOutlet  UIView       *cutoutView;   // Doughnut
+@property  (weak, nonatomic)  IBOutlet  UILabel      *numberLabel;  // Label, was numberView
 
-@property  (strong, nonatomic)  CAShapeLayer         *maskLayer;
+@property  (strong, nonatomic)  CAShapeLayer         *ocrMaskLayer;
 @property  (assign, nonatomic)  UIDeviceOrientation   currentDeviceOrientation;
 
 @property  (strong, nonatomic)  AVCaptureSession     *captureSession;
@@ -27,7 +29,7 @@ Main view controller: handles camera, preview and cutout UI.
 @property  (strong, nonatomic)  AVCaptureDevice      *captureDevice;
 @property  (strong, nonatomic)  AVCaptureVideoDataOutput  *videoDataOutput;
 @property  (strong, nonatomic)  dispatch_queue_t      videoDataOutputQueue;
-@property  (assign, nonatomic)  CGRect                regionOfInterest;
+@property  (assign, nonatomic)  CGRect                ocrRegionOfInterest;
 @property  (assign, nonatomic)  CGImagePropertyOrientation  textOrientation;
 @property  (assign, nonatomic)  double                bufferAspectRatio;
 

@@ -23,6 +23,31 @@ Utilities for dealing with recognized strings
    // +1-xxx-xxx-xxxx
    // Note that this doesn't only look for digits since some digits look
    // very similar to letters. This is handled later.
+   NSString  *pattern = @"^\\d{1,3}(?:.\\d{3})*\\,\\d{2}.*(EUR|KN|kn|Kn|Kuna|Kune|Eur)?";   
+   NSError   *error = NULL;
+   
+   NSLog (@"String test: %@", self);
+
+   NSRegularExpression  *regex = [NSRegularExpression regularExpressionWithPattern:pattern
+                                                                           options:NSRegularExpressionCaseInsensitive 
+                                                                             error:&error];
+   
+   if ([regex numberOfMatchesInString:self options:0 range:NSMakeRange(0, [self length])])  {
+      NSLog (@"String OK: %@", self);
+      return (self);
+   }
+   
+   if ([regex numberOfMatchesInString:@"123,45" options:0 range:NSMakeRange(0, [self length])])  {
+      NSLog (@"String OK: %@", @"123,45");
+      return (self);
+   }
+   
+   if ([regex numberOfMatchesInString:@"123,45Kn" options:0 range:NSMakeRange(0, [self length])])  {
+      NSLog (@"String OK: %@", @"123,45Kn");
+      return (self);
+   }
+
+#ifdef _NIJE_
    NSString  *pattern = @""
    @"(?x)"               //  Verbose regex, allows comments
    @"(?:\\+1-?)?"            //  Potential international prefix, may have -
@@ -89,6 +114,8 @@ Utilities for dealing with recognized strings
       *retRange = range;
    
    return (phoneNumberDigits);
+#endif
+   return (nil);
 }
    
 @end
@@ -101,6 +128,7 @@ Utilities for dealing with recognized strings
 {
    if ([super init])  {
       self.seenStrings = [NSMutableDictionary dictionary];
+      self.frameIndex = 0;
       self.bestCount = 0;
       self.bestString = @"";
    }
@@ -114,22 +142,23 @@ Utilities for dealing with recognized strings
    StringObservation  observation;
 
    for (NSString  *string in strings)  {
+      NSLog (@"String %@ searching key!", string);
       value = [self.seenStrings objectForKey:string];
 
       if (!value)  {
-         observation.lastSeen = 0;
-         observation.count    = -1;
+         NSLog (@"NOT FOUND! %@ in dictionary of %d elements!", string, (int)self.seenStrings.count);
+         observation.count = 0;
       }
       else  {
          [value getValue:&observation];
-         observation.lastSeen = self.frameIndex;
-         observation.count++;
       }
+      observation.lastSeen = self.frameIndex;
+      observation.count++;
 
       value = [NSValue value:&observation withObjCType:@encode(StringObservation)]; 
       [self.seenStrings setObject:value forKey:string];
 
-      NSLog (@"Seen %@ %d times", string, observation.count);
+      NSLog (@"Seen %@ %d times, set into dic of %d elements.", string, observation.count, (int)self.seenStrings.count);
    }
    
    NSMutableArray<NSString *> *obsoleteStrings = [NSMutableArray array];
@@ -140,8 +169,10 @@ Utilities for dealing with recognized strings
       
       [value getValue:&observation];
       
-      if (observation.lastSeen < self.frameIndex - 30)
+      if (observation.lastSeen < self.frameIndex - 30)  {
+         NSLog (@"Removing %@, last seen: %d and frameIndex is: %d", string, observation.lastSeen, self.frameIndex);
          [obsoleteStrings addObject:string];
+      }
       
       int  count = observation.count;
 

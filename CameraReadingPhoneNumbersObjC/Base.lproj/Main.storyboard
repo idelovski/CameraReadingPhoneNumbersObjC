@@ -57,7 +57,7 @@
                     </view>
                     <connections>
                         <outlet property="cutoutView" destination="GHD-L3-UdR" id="yYG-xn-hx8"/>
-                        <outlet property="numberView" destination="b6V-sz-xn2" id="2Qq-nM-A2x"/>
+                        <outlet property="numberLabel" destination="b6V-sz-xn2" id="YHm-h6-1AG"/>
                         <outlet property="previewView" destination="7Eq-8r-JHG" id="bAo-as-HVc"/>
                     </connections>
                 </viewController>

@@ -16,9 +16,11 @@ Vision view controller.
 #import "ViewController.h"
 #import "StringUtils.h"
 
+// Subclass of ViewController
+
 @interface  VisionViewController : ViewController
 
-@property  (strong, nonatomic)  VNRecognizeTextRequest  *request;
+@property  (strong, nonatomic)  VNRecognizeTextRequest  *ocrRequest;   // was just request
 @property  (strong, nonatomic)  StringTracker           *numberTracker;
 
 @property  (strong, nonatomic)  NSMutableArray<CAShapeLayer *>  *boxLayers;
