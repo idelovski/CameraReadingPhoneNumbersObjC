@@ -21,6 +21,8 @@ Main view controller: handles camera, preview and cutout UI.
 @property  (weak, nonatomic)  IBOutlet  UIView       *cutoutView;   // Doughnut
 @property  (weak, nonatomic)  IBOutlet  UILabel      *numberLabel;  // Label, was numberView
 
+@property  (strong, nonatomic)          UILabel      *upperLabel;  // Label, was numberView
+
 @property  (strong, nonatomic)  CAShapeLayer         *ocrMaskLayer;
 @property  (assign, nonatomic)  UIDeviceOrientation   currentDeviceOrientation;
 

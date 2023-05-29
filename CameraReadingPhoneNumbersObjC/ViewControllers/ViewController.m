@@ -40,9 +40,41 @@ Main view controller: handles camera, preview and cutout UI.
 
    self.visionToAVFTransform = CGAffineTransformIdentity;
    
+   self.upperLabel = [self _newStandardLabel];
+   [self.view addSubview:self.upperLabel];
+   
+   self.numberLabel.backgroundColor = [UIColor clearColor];
+   self.numberLabel.textAlignment = NSTextAlignmentCenter;
+   self.numberLabel.font = [UIFont boldSystemFontOfSize:24.0];
+   
    // return (self);
 }
 
+- (UILabel *)_newStandardLabel
+{
+   // Create a UILabel instance
+   UILabel  *aLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+   
+   // Set the label's font
+   aLabel.font = [UIFont boldSystemFontOfSize:24.0];
+   
+   // Set the label's text color
+   aLabel.textColor = [UIColor blackColor];
+   
+   // Set the label's background color
+   aLabel.backgroundColor = [UIColor clearColor];
+   
+   // Set the label's text alignment
+   aLabel.textAlignment = NSTextAlignmentCenter;
+   
+   // Set the label's line break mode
+   aLabel.lineBreakMode = NSLineBreakByWordWrapping;
+   
+   // Set the label's number of lines (0 for unlimited)
+   aLabel.numberOfLines = 0;
+      
+   return (aLabel);
+}
 - (void)viewDidLoad
 {
    [super viewDidLoad];
@@ -181,10 +213,15 @@ Main view controller: handles camera, preview and cutout UI.
    // Move the number view down to under cutout.
    CGRect  numFrame = cutout;
    
-   numFrame.origin.y += numFrame.size.height;
+   numFrame.origin.y += numFrame.size.height / 3. * 2.;
 
    self.numberLabel.frame = numFrame;  // Label
    NSLog (@"updateCutout - self.numberLabel.frame: %@", NSStringFromCGRect(self.numberLabel.frame));
+   
+   numFrame = cutout;
+   numFrame.origin.y -= numFrame.size.height / 3. * 2.;
+
+   self.upperLabel.frame = numFrame;
 }
       
 - (void)setupOrientationAndTransform  // called from -calculateRegionOfInterest
@@ -337,8 +374,22 @@ Main view controller: handles camera, preview and cutout UI.
       [self.captureSession stopRunning];
       
       dispatch_async (dispatch_get_main_queue(), ^{
-         self.numberLabel.text = string;
+         
+         char  srcChars[256], *chPtr = NULL;
+         
+         snprintf (srcChars, 256, "%s", [string UTF8String]);
+         
+         if ((chPtr = strchr(srcChars, ',')))
+            *chPtr = '.';
+         
+         NSString  *hrdString = [NSString stringWithFormat:@"%.2f Kn", atof(srcChars) * 7.5345];
+         NSString  *demString = [NSString stringWithFormat:@"%.2f Eur", atof(srcChars) / 7.5345];
+         
+         self.numberLabel.text = hrdString;
          self.numberLabel.hidden = NO;
+
+         self.upperLabel.text = demString;
+         self.upperLabel.hidden = NO;
       });
    });
 }
@@ -350,7 +401,7 @@ Main view controller: handles camera, preview and cutout UI.
          [self.captureSession startRunning];
       }
       dispatch_async (dispatch_get_main_queue(), ^{
-         self.numberLabel.hidden = YES;
+         self.numberLabel.hidden = self.upperLabel.hidden = YES;
       });
    });
 }
