@@ -37,6 +37,7 @@ Utilities for dealing with recognized strings
       return (self);
    }
    
+#ifdef _NIJE_
    if ([regex numberOfMatchesInString:@"123,45" options:0 range:NSMakeRange(0, [self length])])  {
       NSLog (@"String OK: %@", @"123,45");
       return (self);
@@ -46,7 +47,7 @@ Utilities for dealing with recognized strings
       NSLog (@"String OK: %@", @"123,45Kn");
       return (self);
    }
-
+#endif
 #ifdef _NIJE_
    NSString  *pattern = @""
    @"(?x)"               //  Verbose regex, allows comments
