@@ -194,7 +194,7 @@ Utilities for dealing with recognized strings
 
 - (NSString *)getStableString
 {
-   if (self.bestCount >= 10)
+   if (self.bestCount >= 6)
       return (self.bestString);
 
    return (nil);

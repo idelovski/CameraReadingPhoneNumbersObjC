@@ -84,7 +84,7 @@ Main view controller: handles camera, preview and cutout UI.
    self.previewView.session = self.captureSession;
 
    // Set up cutout view.
-   self.cutoutView.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.5f];
+   self.cutoutView.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.2f];
    self.ocrMaskLayer.backgroundColor  = [UIColor clearColor].CGColor;
    self.ocrMaskLayer.fillRule = kCAFillRuleEvenOdd;
 
@@ -368,6 +368,25 @@ Main view controller: handles camera, preview and cutout UI.
    [self.captureSession startRunning];
 }
 
+- (void)updateLabelsWithFrame:(CGRect)ocrRect
+{
+   CGRect   numFrame = self.numberLabel.frame;
+   CGPoint  ocrCenter = CGPointMake (ocrRect.origin.x + ocrRect.size.width / 2., 
+                                     ocrRect.origin.y + ocrRect.size.height / 2.);
+   CGPoint  numCenter = CGPointMake (numFrame.origin.x + numFrame.size.width / 2., 
+                                     numFrame.origin.y + numFrame.size.height / 2.);
+   
+   numFrame.origin.x -= numCenter.x - ocrCenter.x;
+   
+   self.numberLabel.frame = numFrame;
+
+   numFrame = self.upperLabel.frame;  // Label
+   numFrame.origin.x -= numCenter.x - ocrCenter.x;
+
+   self.upperLabel.frame = numFrame;
+}
+
+
 - (void)showString:(NSString *)string
 {
    // Found a definite number.
@@ -398,7 +417,7 @@ Main view controller: handles camera, preview and cutout UI.
    });
 }
 
-- (IBAction)handleTap:(UITapGestureRecognizer *)sender
+- (void)handleTap:(UITapGestureRecognizer *)sender
 {
    dispatch_async (self.captureSessionQueue, ^{
       if (!self.captureSession.isRunning)  {

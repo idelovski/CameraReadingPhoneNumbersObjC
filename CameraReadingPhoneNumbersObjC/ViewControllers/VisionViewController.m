@@ -170,7 +170,9 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
          box = CGRectApplyAffineTransform (box, self.visionToAVFTransform);
          
          CGRect  rect = [layer rectForMetadataOutputRectOfInterest:box];  // box.applying(self.visionToAVFTransform)
+         [self updateLabelsWithFrame:rect];
          [self drawRect:rect color:[UIColor greenColor].CGColor];
+         
       }
    });
 }

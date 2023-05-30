@@ -45,7 +45,8 @@ Main view controller: handles camera, preview and cutout UI.
 - (void)setupOrientationAndTransform;
 - (void)setupCamera;
 - (void)showString:(NSString *)string;
-- (IBAction)handleTap:(UITapGestureRecognizer *)sender;
+- (void)handleTap:(UITapGestureRecognizer *)sender;
+- (void)updateLabelsWithFrame:(CGRect)ocrRect;
 
 - (AVCaptureVideoOrientation)currentVideoOrientation;
 
