@@ -101,6 +101,10 @@ Main view controller: handles camera, preview and cutout UI.
          [self calculateRegionOfInterest];
       });
    });
+   
+   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                         action:@selector(handleTap:)];
+   [self.view addGestureRecognizer:tap];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size

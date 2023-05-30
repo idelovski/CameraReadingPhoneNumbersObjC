@@ -34,8 +34,11 @@ Utilities for dealing with recognized strings
    
    if ([regex numberOfMatchesInString:self options:0 range:NSMakeRange(0, [self length])])  {
       NSLog (@"String OK: %@", self);
+      if (retRange)
+         *retRange = NSMakeRange(0, [self length]);
       return (self);
    }
+   
    
 #ifdef _NIJE_
    if ([regex numberOfMatchesInString:@"123,45" options:0 range:NSMakeRange(0, [self length])])  {
