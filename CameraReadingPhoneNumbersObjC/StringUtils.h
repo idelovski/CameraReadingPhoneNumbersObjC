@@ -10,7 +10,7 @@ Utilities for dealing with recognized strings
 // -------------------------------
 @interface  NSString (PhoneNumbers)
 
-- (NSString *)extractPhoneNumber:(NSRange *)retRange;
+- (NSString *)extractCurrencyValueRange:(NSRange *)retRange currency:(NSString *__autoreleasing*)retCurrency;
 
 @end
 

@@ -9,48 +9,72 @@ Utilities for dealing with recognized strings
 
 @implementation  NSString (PhoneNumbers)
 
-- (NSString *)extractPhoneNumber:(NSRange *)retRange;
+- (NSString *)extractCurrencyValueRange:(NSRange *)retRange currency:(NSString *__autoreleasing*)retCurrency;
 {
-   // Do a first pass to find any substring that could be a US phone
-   // number. This will match the following common patterns and more:
-   // xxx-xxx-xxxx
-   // xxx xxx xxxx
-   // (xxx) xxx-xxxx
-   // (xxx)xxx-xxxx
-   // xxx.xxx.xxxx
-   // xxx xxx-xxxx
-   // xxx/xxx.xxxx
-   // +1-xxx-xxx-xxxx
-   // Note that this doesn't only look for digits since some digits look
-   // very similar to letters. This is handled later.
-   NSString  *pattern = @"^\\d{1,3}(?:.\\d{3})*\\,\\d{2}.*(EUR|KN|kn|Kn|Kuna|Kune|Eur)?";   
+   // Do a first pass with original self
+   // Then modify it with alternate characters since some digits look
+   // very similar to letters.
+   
+   int   i, j, loop;
+   char  tmpStr[256];
+   char  srcChars[10] = { 's', 'S', 'o', 'Q', 'O', 'l', 'I', '|', 'G', 'B' };   
+   char  tarChars[10] = { '5', '5', '0', '0', '0', '1', '1', '1', '6', '8' };
+   
+   // NSArray   *currencies = @[ @"KN", @"kn", @"Kn", @"kuna", @"kune", @"Kuna", @"Kune", @"EUR", @"Eur", @"eur", @"€" ];
+
+   NSString  *testStr = self;
+   // NSString  *pattern = @"^\\d{1,3}(?:.\\d{3})*\\,\\d{2}.*(KN|kn|Kn|kuna|kune|Kuna|Kune|EUR|Eur|eur|€)?";   
+   NSString  *fullPattern = @"^\\d{1,3}(?:.\\d{3})*\\,\\d{2}.*(Kn|Kuna|Kune|EUR|€)?";   
+   NSString  *currPattern = @"(Kn|Kuna|Kune|EUR|€)";   
    NSError   *error = NULL;
    
    NSLog (@"String test: %@", self);
 
-   NSRegularExpression  *regex = [NSRegularExpression regularExpressionWithPattern:pattern
+   NSRegularExpression  *fullRegex = [NSRegularExpression regularExpressionWithPattern:fullPattern
                                                                            options:NSRegularExpressionCaseInsensitive 
                                                                              error:&error];
    
-   if ([regex numberOfMatchesInString:self options:0 range:NSMakeRange(0, [self length])])  {
-      NSLog (@"String OK: %@", self);
-      if (retRange)
-         *retRange = NSMakeRange(0, [self length]);
-      return (self);
+   if (retCurrency)  {
+      *retCurrency = nil;
+      NSRegularExpression  *currRegex = [NSRegularExpression regularExpressionWithPattern:currPattern
+                                                                                  options:NSRegularExpressionCaseInsensitive 
+                                                                                    error:&error];
+      
+      if (!error && currRegex)  {
+         [currRegex enumerateMatchesInString:testStr
+                                     options:0
+                                       range:NSMakeRange(0, [testStr length])
+                                  usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop)  {
+            if (match.numberOfRanges)  {
+               NSRange    mRange = [match rangeAtIndex:0];
+               NSString  *matchString = [testStr substringWithRange:mRange];
+               
+               *retCurrency = matchString;
+            }
+         }];
+      }
    }
    
+   for (loop=0; loop<2; loop++)  {   
+      if ([fullRegex numberOfMatchesInString:testStr options:0 range:NSMakeRange(0, [testStr length])])  {
+         NSLog (@"String [%d] OK: %@", loop+1, testStr);
+         if (retRange)
+            *retRange = NSMakeRange(0, [testStr length]);
+         return (testStr);
+      }
+
+      snprintf (tmpStr, 256, "%s", [self UTF8String]);
    
-#ifdef _NIJE_
-   if ([regex numberOfMatchesInString:@"123,45" options:0 range:NSMakeRange(0, [self length])])  {
-      NSLog (@"String OK: %@", @"123,45");
-      return (self);
+      for (i=0; tmpStr[i] && i<128; i++)  {
+         for (j=0; j<10; j++)  {
+            if (tmpStr[i] == srcChars[j])
+               tmpStr[i] = tarChars[j];
+         }
+      }
+      
+      testStr = [NSString stringWithUTF8String:tmpStr];
    }
    
-   if ([regex numberOfMatchesInString:@"123,45Kn" options:0 range:NSMakeRange(0, [self length])])  {
-      NSLog (@"String OK: %@", @"123,45Kn");
-      return (self);
-   }
-#endif
 #ifdef _NIJE_
    NSString  *pattern = @""
    @"(?x)"               //  Verbose regex, allows comments

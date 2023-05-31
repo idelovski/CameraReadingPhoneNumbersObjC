@@ -54,7 +54,8 @@ Vision view controller.
          if (candidate.count)  {
             NSRange    range;
             NSError   *bError;
-            NSString  *numberStr = [candidate.firstObject.string extractPhoneNumber:&range];
+            NSString  *retCurrency;
+            NSString  *numberStr = [candidate.firstObject.string extractCurrencyValueRange:&range currency:&retCurrency];
             
             if (numberStr)  {
                VNRecognizedText  *recText = [candidate objectAtIndex:0];
@@ -63,7 +64,7 @@ Vision view controller.
                                                                                        error:&bError];
                CGRect  box = boundingObservation.boundingBox;
 
-               NSLog (@"Green Box: %@", NSStringFromCGRect(boundingObservation.boundingBox)); 
+               NSLog (@"Green Box: %@ (%@)", NSStringFromCGRect(boundingObservation.boundingBox), retCurrency ? retCurrency : @"???"); 
                
                [numbers addObject:numberStr];
                [greenBoxes addObject:[NSValue valueWithCGRect:box]];
@@ -72,7 +73,7 @@ Vision view controller.
             }
          }
          if (numberIsSubstring)  {
-            NSLog (@"Red Box: %@", NSStringFromCGRect(textObservation.boundingBox)); 
+            // NSLog (@"Red Box: %@", NSStringFromCGRect(textObservation.boundingBox)); 
             [redBoxes addObject:[NSValue valueWithCGRect:textObservation.boundingBox]];
          }
       }
@@ -107,7 +108,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
       
       if (pixelBuffer)  {
          // Configure for running in real-time.
-         self.ocrRequest.recognitionLevel = VNRequestTextRecognitionLevelFast;
+         self.ocrRequest.recognitionLevel = VNRequestTextRecognitionLevelAccurate;  // or VNRequestTextRecognitionLevelFast
          // Language correction won't help recognizing phone numbers. It also
          // makes recognition slower.
          self.ocrRequest.usesLanguageCorrection = NO;

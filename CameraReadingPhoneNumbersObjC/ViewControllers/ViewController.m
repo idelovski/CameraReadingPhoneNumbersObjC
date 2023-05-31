@@ -204,9 +204,9 @@ Main view controller: handles camera, preview and cutout UI.
    // If it does not work, see: https://stackoverflow.com/questions/18710933/objective-c-how-to-rotate-cgrect
    CGRect  cutout = [self.previewView.videoPreviewLayer rectForMetadataOutputRectOfInterest:CGRectApplyAffineTransform(self.ocrRegionOfInterest, roiRectTransform)];
    
-   NSLog (@"updateCutout - view: %@", NSStringFromCGRect(self.view.frame));
-   NSLog (@"updateCutout - cutout: %@", NSStringFromCGRect(cutout));
-   NSLog (@"updateCutout - cutoutView: %@", NSStringFromCGRect(self.cutoutView.frame));
+   // NSLog (@"updateCutout - view: %@", NSStringFromCGRect(self.view.frame));
+   // NSLog (@"updateCutout - cutout: %@", NSStringFromCGRect(cutout));
+   // NSLog (@"updateCutout - cutoutView: %@", NSStringFromCGRect(self.cutoutView.frame));
    
    // Create the mask.
    CGRect         cutoutViewFrame = self.cutoutView.frame;
@@ -220,7 +220,7 @@ Main view controller: handles camera, preview and cutout UI.
    numFrame.origin.y += numFrame.size.height / 3. * 2.;
 
    self.numberLabel.frame = numFrame;  // Label
-   NSLog (@"updateCutout - self.numberLabel.frame: %@", NSStringFromCGRect(self.numberLabel.frame));
+   // NSLog (@"updateCutout - self.numberLabel.frame: %@", NSStringFromCGRect(self.numberLabel.frame));
    
    numFrame = cutout;
    numFrame.origin.y -= numFrame.size.height / 3. * 2.;
