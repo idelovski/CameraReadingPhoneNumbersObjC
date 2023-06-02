@@ -109,7 +109,7 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
       if (pixelBuffer)  {
          // Configure for running in real-time.
          self.ocrRequest.recognitionLevel = VNRequestTextRecognitionLevelAccurate;  // or VNRequestTextRecognitionLevelFast
-         // Language correction won't help recognizing phone numbers. It also
+         // Language correction won't help recognizing numerical values or phone numbers. It also
          // makes recognition slower.
          self.ocrRequest.usesLanguageCorrection = NO;
          // Only run on the region of interest for maximum speed.

@@ -398,15 +398,26 @@ Main view controller: handles camera, preview and cutout UI.
       
       dispatch_async (dispatch_get_main_queue(), ^{
          
-         char  srcChars[256], *chPtr = NULL;
+         char  srcChars[256], goodChars[256], *chPtr = NULL;
          
          snprintf (srcChars, 256, "%s", [string UTF8String]);
          
-         if ((chPtr = strchr(srcChars, ',')))
+         // Remove space and thousand separator
+         
+         chPtr = goodChars;
+         
+         for (int i=0; srcChars[i]; i++)  {
+            if ((srcChars[i] != ' ') && ((srcChars[i] != '.')))  //  12.123,45 Eur
+               *chPtr++ = srcChars[i];
+         }
+         
+         *chPtr = '\0';
+         
+         if ((chPtr = strchr(goodChars, ',')))
             *chPtr = '.';
          
-         NSString  *hrdString = [NSString stringWithFormat:@"%.2f Kn", atof(srcChars) * 7.5345];
-         NSString  *demString = [NSString stringWithFormat:@"%.2f Eur", atof(srcChars) / 7.5345];
+         NSString  *hrdString = [NSString stringWithFormat:@"%.2f Kn", atof(goodChars) * 7.5345];
+         NSString  *demString = [NSString stringWithFormat:@"%.2f Eur", atof(goodChars) / 7.5345];
          
          self.numberLabel.text = hrdString;
          self.numberLabel.hidden = NO;

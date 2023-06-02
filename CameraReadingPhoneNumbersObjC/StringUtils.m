@@ -33,6 +33,7 @@ Utilities for dealing with recognized strings
    NSRegularExpression  *fullRegex = [NSRegularExpression regularExpressionWithPattern:fullPattern
                                                                            options:NSRegularExpressionCaseInsensitive 
                                                                              error:&error];
+   // First, find the currency
    
    if (retCurrency)  {
       *retCurrency = nil;
@@ -55,7 +56,9 @@ Utilities for dealing with recognized strings
       }
    }
    
-   for (loop=0; loop<2; loop++)  {   
+   // Now, find the value
+   
+   for (loop=0; loop<3; loop++)  {   
       if ([fullRegex numberOfMatchesInString:testStr options:0 range:NSMakeRange(0, [testStr length])])  {
          NSLog (@"String [%d] OK: %@", loop+1, testStr);
          if (retRange)
@@ -63,12 +66,29 @@ Utilities for dealing with recognized strings
          return (testStr);
       }
 
-      snprintf (tmpStr, 256, "%s", [self UTF8String]);
-   
-      for (i=0; tmpStr[i] && i<128; i++)  {
-         for (j=0; j<10; j++)  {
-            if (tmpStr[i] == srcChars[j])
-               tmpStr[i] = tarChars[j];
+      snprintf (tmpStr, 256, "%s", [testStr UTF8String]);
+      
+      if (!loop)  {
+         for (i=0; tmpStr[i] && i<128; i++)  {
+            for (j=0; j<10; j++)  {
+               if (tmpStr[i] == srcChars[j])
+                  tmpStr[i] = tarChars[j];
+            }
+         }
+      }
+      else  {
+         char  *semiPtr = NULL, *comaPtr = NULL;
+         
+         semiPtr = strchr (tmpStr, '.');
+         comaPtr = strchr (tmpStr, ',');
+         
+         if (!comaPtr && semiPtr)  // 123.23
+            *semiPtr = ',';
+         else  if (comaPtr && semiPtr)  {
+            if (comaPtr < semiPtr)  {
+               *semiPtr = ',';
+               *comaPtr = '.';
+            }
          }
       }
       
@@ -197,7 +217,7 @@ Utilities for dealing with recognized strings
       
       [value getValue:&observation];
       
-      if (observation.lastSeen < self.frameIndex - 30)  {
+      if (observation.lastSeen < self.frameIndex - 50)  {
          NSLog (@"Removing %@, last seen: %d and frameIndex is: %d", string, observation.lastSeen, self.frameIndex);
          [obsoleteStrings addObject:string];
       }
