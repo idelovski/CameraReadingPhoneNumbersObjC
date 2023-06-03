@@ -77,16 +77,16 @@ Utilities for dealing with recognized strings
          }
       }
       else  {
-         char  *semiPtr = NULL, *comaPtr = NULL;
+         char  *perdPtr = NULL, *comaPtr = NULL;
          
-         semiPtr = strchr (tmpStr, '.');
+         perdPtr = strchr (tmpStr, '.');
          comaPtr = strchr (tmpStr, ',');
          
-         if (!comaPtr && semiPtr)  // 123.23
-            *semiPtr = ',';
-         else  if (comaPtr && semiPtr)  {
-            if (comaPtr < semiPtr)  {
-               *semiPtr = ',';
+         if (!comaPtr && perdPtr)  // 123.23
+            *perdPtr = ',';
+         else  if (comaPtr && perdPtr)  {
+            if (comaPtr < perdPtr)  {
+               *perdPtr = ',';
                *comaPtr = '.';
             }
          }
